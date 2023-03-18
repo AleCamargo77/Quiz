@@ -28,4 +28,16 @@ export default class ResponseModel {
   get revelada() {
     return this.#revelada;
   }
+
+  reveal() {
+    return new ResponseModel(this.#valor, this.#certa, false);
+  }
+
+  toObject() {
+    return {
+      valor: this.#valor,
+      certa: this.#certa,
+      revelada: this.#revelada,
+    };
+  }
 }

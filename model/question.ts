@@ -1,3 +1,4 @@
+import { random } from "functions/arrays";
 import ResponseModel from "./response";
 
 export default class QuestionModel {
@@ -40,5 +41,35 @@ export default class QuestionModel {
       if (resposta.revelada) return true;
     }
     return false;
+  }
+
+  responseWith(index: number): QuestionModel {
+    const valid = this.#respostas[index]?.certa;
+    const responses = this.#respostas.map((resposta, i) => {
+      const responseSelected = index === i;
+      const revealing = responseSelected || resposta.certa;
+      return revealing ? resposta.reveal() : resposta;
+    });
+    return new QuestionModel(this.id, this.#enunciado, responses, valid);
+  }
+
+  randomAnswers(): QuestionModel {
+    let answersRandom = random(this.#respostas);
+    return new QuestionModel(
+      this.#id,
+      this.#enunciado,
+      answersRandom,
+      this.#acertou
+    );
+  }
+
+  toObject() {
+    return {
+      id: this.#id,
+      enunciado: this.#enunciado,
+      respostas: this.#respostas.map((resp) => resp.toObject()),
+      respondido: this.respondida,
+      acertou: this.#acertou,
+    };
   }
 }

@@ -2,28 +2,32 @@ import QuestionModel from "../../../model/question";
 import ResponseModel from "../../../model/response";
 
 const questions: QuestionModel[] = [
-  new QuestionModel(306, "Qual bicho transmite a Doença de Chagas?", [
-    ResponseModel.notValid("Abelha"),
-    ResponseModel.notValid("Barata"),
-    ResponseModel.notValid("Pulga"),
-    ResponseModel.isValid("Barbeiro"),
+  new QuestionModel(306, "Em que ano o Palmeiras foi fundado?", [
+    ResponseModel.notValid("1 de setembro de 1910"),
+    ResponseModel.notValid("14 de abril de 1912"),
+    ResponseModel.notValid("25 de janeiro de 1930"),
+    ResponseModel.isValid("26 de agosto de 1914."),
   ]),
   new QuestionModel(
     202,
-    'Qual fruto é conhecido no Norte e Nordeste como "jerimum"?',
+    "Quem é o maior artilheiro da história do Palmeiras?",
     [
-      ResponseModel.notValid("Caju"),
-      ResponseModel.notValid("Côco"),
-      ResponseModel.notValid("Chuchu"),
-      ResponseModel.isValid("Abóbora"),
+      ResponseModel.notValid("Evair"),
+      ResponseModel.notValid("Dudu"),
+      ResponseModel.notValid("Ademir da Guia"),
+      ResponseModel.isValid("Heitor"),
     ]
   ),
-  new QuestionModel(203, "Qual é o coletivo de cães?", [
-    ResponseModel.notValid("Manada"),
-    ResponseModel.notValid("Alcateia"),
-    ResponseModel.notValid("Rebanho"),
-    ResponseModel.isValid("Matilha"),
-  ]),
+  new QuestionModel(
+    203,
+    "Em que ano o Palmeiras conquistou a Tríplice Coroa (Campeonato Paulista, Copa do Brasil e Campeonato Brasileiro)? ",
+    [
+      ResponseModel.notValid("2022"),
+      ResponseModel.notValid("2016"),
+      ResponseModel.notValid("2018"),
+      ResponseModel.isValid("2020"),
+    ]
+  ),
   new QuestionModel(
     204,
     "Qual é o triângulo que tem todos os lados diferentes?",
