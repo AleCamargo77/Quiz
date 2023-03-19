@@ -67,9 +67,9 @@ export default class QuestionModel {
     return {
       id: this.#id,
       enunciado: this.#enunciado,
-      respostas: this.#respostas.map((resp) => resp.toObject()),
       respondido: this.respondida,
       acertou: this.#acertou,
+      respostas: this.#respostas.map((resp) => resp.toObject()),
     };
   }
 }
