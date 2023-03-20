@@ -10,11 +10,11 @@ export default class ResponseModel {
   }
 
   static isValid(valor: string) {
-    return new ResponseModel(valor, true);
+    return new ResponseModel(valor, true, false);
   }
 
   static notValid(valor: string) {
-    return new ResponseModel(valor, false);
+    return new ResponseModel(valor, false, false);
   }
 
   get valor() {
@@ -30,7 +30,7 @@ export default class ResponseModel {
   }
 
   reveal() {
-    return new ResponseModel(this.#valor, this.#certa, true);
+    return new ResponseModel(this.#valor, this.#certa, false);
   }
 
   toObject() {

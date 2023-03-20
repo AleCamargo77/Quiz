@@ -2,16 +2,19 @@ import QuestionModel from "model/question";
 import styles from "../src/styles/question.module.css";
 import Response from "./Response";
 import Statement from "./Statement";
+import Timer from "./Timer";
 
 const letters = [
   { valor: "A", cor: "#F2C866" },
   { valor: "B", cor: "#F266BA" },
-  { valor: "C", cor: "#85D$F2" },
+  { valor: "C", cor: "#85D4F2" },
   { valor: "D", cor: "#BCE596" },
 ];
 
 interface QuestionProps {
   valor: QuestionModel;
+  onResponse: (index: number) => void;
+  timeOut: () => void;
 }
 
 export default function Question(props: QuestionProps) {
@@ -26,6 +29,7 @@ export default function Question(props: QuestionProps) {
           indice={i}
           letra={letters[i].valor}
           corFundoLetra={letters[i].cor}
+          onResponse={props.onResponse}
         />
       );
     });
@@ -34,6 +38,7 @@ export default function Question(props: QuestionProps) {
   return (
     <div className={styles.question}>
       <Statement text={question.enunciado} />
+      <Timer duration={10} timeOut={props.timeOut} />
       {renderResponses()}
     </div>
   );

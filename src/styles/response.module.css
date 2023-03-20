@@ -28,6 +28,29 @@
   background-color: #fff;
 }
 
+.back > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  border-radius: 12px;
+}
+
+.valid {
+  background-color: #2baa6d;
+}
+
+.notValid {
+  background-color: #e44a4c;
+}
+
+.valid .content,
+.notValid .content {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
 .letter {
   display: flex;
   justify-content: center;
