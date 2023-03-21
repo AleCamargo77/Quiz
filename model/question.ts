@@ -43,6 +43,10 @@ export default class QuestionModel {
     return false;
   }
 
+  get naoRespondida() {
+    return !this.respondida;
+  }
+
   responseWith(index: number): QuestionModel {
     const valid = this.#respostas[index]?.certa;
     const responses = this.#respostas.map((resposta, i) => {
@@ -50,7 +54,7 @@ export default class QuestionModel {
       const revealing = responseSelected || resposta.certa;
       return revealing ? resposta.reveal() : resposta;
     });
-    return new QuestionModel(this.id, this.#enunciado, responses, valid);
+    return new QuestionModel(this.id, this.enunciado, responses, valid);
   }
 
   randomAnswers(): QuestionModel {
