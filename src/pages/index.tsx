@@ -13,11 +13,12 @@ const questionState = new QuestionModel(1, "Melhor cor?", [
   ResponseModel.isValid("Preto"),
 ]);
 
-const BASE_URL = "http://localhost:300/api";
+const BASE_URL = "http://localhost:3000/api";
 
 export default function Home() {
-  const [question, setQuestion] = useState(questionState);
+  const [question, setQuestion] = useState<QuestionModel>(questionState);
   const [idsQuestions, setIdsQuestions] = useState<number[]>([]);
+  const [responseValid, setResponseValid] = useState<number>(0);
 
   async function loadingIdsQuestions() {
     const resp = await fetch(`${BASE_URL}/quiz`);
@@ -28,7 +29,9 @@ export default function Home() {
   async function loadingQuestion(idQuestion: number) {
     const resp = await fetch(`${BASE_URL}/questions/${idQuestion}`);
     const json = await resp.json();
-    console.log(json);
+    const newQestion = QuestionModel.createObject(json);
+    setQuestion(newQestion);
+    // console.log(QuestionModel.createObject(json));
   }
 
   useEffect(() => {
@@ -36,8 +39,8 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    is;
-  }, []);
+    idsQuestions.length > 0 && loadingQuestion(idsQuestions[0]);
+  }, [idsQuestions]);
 
   // function onResponse(index: number) {
   //   setQuestion(question.responseWith(index));
@@ -49,7 +52,12 @@ export default function Home() {
   //   }
   // }
 
-  function questionResponse() {}
+  function questionResponse(questionResponse: QuestionModel) {
+    setQuestion(questionResponse);
+    const valid = questionResponse.acertou;
+    setResponseValid(responseValid + (valid ? 1 : 0));
+    console.log(valid ? 1 : 0);
+  }
 
   function nextStep() {}
 
