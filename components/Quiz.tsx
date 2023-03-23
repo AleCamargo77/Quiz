@@ -31,7 +31,7 @@ export default function Quiz(props: QuizProps) {
       )}
       <Button
         onClick={props.nextStep}
-        text={props.lastQuestion ? "Finalizar" : "Última"}
+        text={props.lastQuestion ? "Finalizar" : "Próxima"}
       />
     </div>
   );

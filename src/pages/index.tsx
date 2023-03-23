@@ -3,20 +3,15 @@ import Button from "components/Button";
 import Question from "components/Question";
 import Quiz from "components/Quiz";
 import QuestionModel from "model/question";
-import ResponseModel from "model/response";
 import { useEffect, useState } from "react";
-
-const questionState = new QuestionModel(1, "Melhor cor?", [
-  ResponseModel.notValid("Verde"),
-  ResponseModel.notValid("Azul"),
-  ResponseModel.notValid("Amarelo"),
-  ResponseModel.isValid("Preto"),
-]);
+import { useRouter } from "next/router";
 
 const BASE_URL = "http://localhost:3000/api";
 
 export default function Home() {
-  const [question, setQuestion] = useState<QuestionModel>(questionState);
+  const router = useRouter();
+
+  const [question, setQuestion] = useState<QuestionModel>();
   const [idsQuestions, setIdsQuestions] = useState<number[]>([]);
   const [responseValid, setResponseValid] = useState<number>(0);
 
@@ -59,24 +54,48 @@ export default function Home() {
     console.log(valid ? 1 : 0);
   }
 
-  function nextStep() {}
+  function idNextQuestion() {
+    const nextIndex = idsQuestions.indexOf(question.id) + 1;
+    return idsQuestions[nextIndex];
+  }
 
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        height: "100vh",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Quiz
-        question={question}
-        lastQuestion={false}
-        questionResponse={questionResponse}
-        nextStep={nextStep}
-      />
-    </div>
+  function nextStep() {
+    const nextId = idNextQuestion();
+    nextId ? goNextQuestion(nextId) : finished();
+  }
+
+  function goNextQuestion(nextId: number) {
+    loadingQuestion(nextId);
+  }
+
+  function finished() {
+    router.push({
+      pathname: "/result",
+      query: {
+        total: idsQuestions.length,
+        certas: responseValid,
+      },
+    });
+  }
+
+  // <div
+  //   style={{
+  //     display: "flex",
+  //     flexDirection: "column",
+  //     height: "100vh",
+  //     justifyContent: "center",
+  //     alignItems: "center",
+  //   }}
+  // >
+  // </div>
+  return question ? (
+    <Quiz
+      question={question}
+      lastQuestion={idNextQuestion() === undefined}
+      questionResponse={questionResponse}
+      nextStep={nextStep}
+    />
+  ) : (
+    false
   );
 }
