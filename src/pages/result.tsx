@@ -2,11 +2,11 @@ import styles from "../styles/Results.module.css";
 
 import { useRouter } from "next/router";
 
-export default function result() {
+export default function Result() {
   const router = useRouter();
 
-  const total = router.query.total;
-  const valids = router.query.valids;
+  const total = +router.query.total;
+  const valids = +router.query.valids;
   const percent = Math.round((valids / total) * 100);
 
   return (

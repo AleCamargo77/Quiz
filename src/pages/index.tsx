@@ -24,8 +24,8 @@ export default function Home() {
   async function loadingQuestion(idQuestion: number) {
     const resp = await fetch(`${BASE_URL}/questions/${idQuestion}`);
     const json = await resp.json();
-    const newQestion = QuestionModel.createObject(json);
-    setQuestion(newQestion);
+    const newQuestion = QuestionModel.createObject(json);
+    setQuestion(newQuestion);
     // console.log(QuestionModel.createObject(json));
   }
 
@@ -55,8 +55,10 @@ export default function Home() {
   }
 
   function idNextQuestion() {
-    const nextIndex = idsQuestions.indexOf(question.id) + 1;
-    return idsQuestions[nextIndex];
+    if (question) {
+      const nextIndex = idsQuestions.indexOf(question.id) + 1;
+      return idsQuestions[nextIndex];
+    }
   }
 
   function nextStep() {
